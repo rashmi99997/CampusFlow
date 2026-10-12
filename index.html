@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CampusFlow - Student Workspace</title>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>CampusFlow</h2>
+                <span class="badge">STUDENT WORKSPACE</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Timetable</a>
+                <a href="#">Assignments</a>
+                <a href="#">Study Tracker</a>
+                <a href="#">Progress</a>
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Good morning!</h1>
+                <p>Here's your academic overview.</p>
+            </header>
+
+            <!-- Summary Cards -->
+            <section class="stats-grid">
+                <div class="card">
+                    <h3>08</h3>
+                    <p>Pending tasks</p>
+                </div>
+                <div class="card">
+                    <h3>05</h3>
+                    <p>Completed</p>
+                </div>
+                <div class="card">
+                    <h3>03</h3>
+                    <p>Upcoming deadlines</p>
+                </div>
+                <div class="card">
+                    <h3>2.5h</h3>
+                    <p>Studied today</p>
+                </div>
+            </section>
+
+            <!-- Today's Tasks Section -->
+            <section class="tasks-section">
+                <div class="section-header">
+                    <h2>Today's Tasks (3)</h2>
+                    <button id="add-task-btn">+ Add New Task</button>
+                </div>
+                
+                <div class="task-list">
+                    <div class="task-card">
+                        <div>
+                            <h4>Revise JavaScript arrays</h4>
+                            <span class="tag high">High priority · Today</span>
+                        </div>
+                    </div>
+                    <div class="task-card completed">
+                        <div>
+                            <h4>Complete DSA practice</h4>
+                            <span class="tag completed-tag">Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
