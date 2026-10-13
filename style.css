@@ -157,3 +157,45 @@
 .tag.completed-tag {
     background: #2ecc71;
 }
+
+/* Individual Task Card */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease;
+}
+
+.task-item:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.task-info h4 {
+    font-size: 0.95rem;
+    color: #1e293b;
+    margin: 0 0 4px 0;
+}
+
+.task-priority {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Completed Task Style (for Day 2) */
+.task-item.completed {
+    background-color: #f8fafc;
+    opacity: 0.7;
+}
+
+.task-item.completed h4 {
+    text-decoration: line-through;
+    color: #94a3b8;
+}
