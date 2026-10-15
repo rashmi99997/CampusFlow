@@ -1,5 +1,5 @@
 // 1. WHAT: An array containing our initial task objects
-const tasks = [
+let tasks = [
     { id: 1, title: "Revise JavaScript arrays", priority: "High · Today", completed: false },
     { id: 2, title: "Complete DSA practice", priority: "Completed", completed: true }
 ];
@@ -13,6 +13,7 @@ const addTaskBtn = document.getElementById('add-task-btn');
 function renderTasks() {
     // Clear out the container first so we don't get duplicates
     taskContainer.innerHTML = '';
+
 
     // Loop through every task in our array and build its HTML
     tasks.forEach(task => {
@@ -29,6 +30,7 @@ function renderTasks() {
                 <h4>${task.title}</h4>
                 <span class="task-priority">${task.priority}</span>
             </div>
+            <button class="delete-btn">Delete</button>
         `;
 
         // --- Wire up the completion logic here ---
@@ -36,6 +38,17 @@ function renderTasks() {
         checkbox.addEventListener('change', function() {
             task.completed = !task.completed;
             renderTasks(); // Wipe and redraw!
+        });
+
+        // --- Wire up the delete logic here ---
+        const deleteBtn = taskItem.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', function() {
+            // 1. Filter out the task whose ID matches this specific task's ID
+            // (Keep everything WHERE task.id DOES NOT EQUAL this task's id)
+            tasks = tasks.filter(t => t.id !== task.id);
+            
+            // 2. Wipe and redraw!
+            renderTasks();
         });
 
         taskContainer.appendChild(taskItem);
@@ -70,6 +83,8 @@ addTaskBtn.addEventListener('click', function() {
     // Re-run renderTasks() so the screen updates instantly with the new task!
     renderTasks();
 });
+
+
 
 // 5. Initial call: Draw the starting tasks when the page first loads
 renderTasks();

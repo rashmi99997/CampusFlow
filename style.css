@@ -199,3 +199,25 @@
     text-decoration: line-through;
     color: #94a3b8;
 }
+/* Make the text block expand to fill the middle space */
+.task-info {
+    flex: 1;
+}
+
+/* Style the delete button */
+.delete-btn {
+    background-color: transparent;
+    color: #94a3b8;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+/* Give it a clean red accent when you hover over it */
+.delete-btn:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
