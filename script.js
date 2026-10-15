@@ -8,11 +8,26 @@ let tasks = [
 const taskContainer = document.querySelector('.task-list');
 const taskInput = document.getElementById('task-input');
 const addTaskBtn = document.getElementById('add-task-btn');
+const pendingCountEl = document.getElementById('pending-count');
+const completedCountEl = document.getElementById('completed-count');
+const upcomingCountEl = document.getElementById('upcoming-count');
 
 // 3. WHAT: The function that draws (renders) our tasks onto the webpage
 function renderTasks() {
     // Clear out the container first so we don't get duplicates
     taskContainer.innerHTML = '';
+
+    //2.Calculate stats
+    
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(task => task.completed).length;
+    const pendingTasks = totalTasks - completedTasks;
+    const upcomingTasks = tasks.filter(task => !task.completed && task.priority.includes('Today')).length;
+
+    pendingCountEl.textContent = pendingTasks;
+    completedCountEl.textContent = completedTasks;
+    upcomingCountEl.textContent = upcomingTasks;
+
 
 
     // Loop through every task in our array and build its HTML
