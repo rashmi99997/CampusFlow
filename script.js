@@ -1,5 +1,5 @@
-// 1. WHAT: An array containing our initial task objects
-let tasks = [
+// 1. WHAT: Load tasks from localStorage, or use default tasks if nothing is saved yet
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [
     { id: 1, title: "Revise JavaScript arrays", priority: "High · Today", completed: false },
     { id: 2, title: "Complete DSA practice", priority: "Completed", completed: true }
 ];
@@ -14,6 +14,9 @@ const upcomingCountEl = document.getElementById('upcoming-count');
 
 // 3. WHAT: The function that draws (renders) our tasks onto the webpage
 function renderTasks() {
+    // Save to localStorage whenever tasks change
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    
     // Clear out the container first so we don't get duplicates
     taskContainer.innerHTML = '';
 
