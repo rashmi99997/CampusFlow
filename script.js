@@ -24,16 +24,23 @@ function renderTasks() {
         }
 
         taskItem.innerHTML = `
+            <input type="checkbox" ${task.completed ? 'checked' : ''} class="task-checkbox">
             <div class="task-info">
                 <h4>${task.title}</h4>
                 <span class="task-priority">${task.priority}</span>
             </div>
         `;
 
-        // Append the newly built task card into the HTML container
+        // --- Wire up the completion logic here ---
+        const checkbox = taskItem.querySelector('.task-checkbox');
+        checkbox.addEventListener('change', function() {
+            task.completed = !task.completed;
+            renderTasks(); // Wipe and redraw!
+        });
+
         taskContainer.appendChild(taskItem);
     });
-}
+} // <--- THIS WAS MISSING! It closes the renderTasks function.
 
 // 4. WHAT: Listen for the user clicking the "Add Task" button
 addTaskBtn.addEventListener('click', function() {
@@ -66,4 +73,3 @@ addTaskBtn.addEventListener('click', function() {
 
 // 5. Initial call: Draw the starting tasks when the page first loads
 renderTasks();
-
