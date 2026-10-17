@@ -106,3 +106,37 @@ addTaskBtn.addEventListener('click', function() {
 
 // 5. Initial call: Draw the starting tasks when the page first loads
 renderTasks();
+
+// --- 1. STUDY HOURS DATA & LOCALSTORAGE ---
+// Load study hours from localStorage, or default to 2.5 if nothing is saved yet
+let studiedHours = parseFloat(localStorage.getItem('studiedHours')) || 2.5;
+
+// Select elements for study hours
+const studiedCountEl = document.getElementById('studied-count');
+const addStudyBtn = document.getElementById('add-study-btn');
+
+// --- 2. RENDER & SAVE FUNCTIONS ---
+function renderStudyHours() {
+    if (studiedCountEl) {
+        studiedCountEl.textContent = studiedHours + 'h';
+    }
+}
+
+function saveStudyHours() {
+    localStorage.setItem('studiedHours', studiedHours);
+    renderStudyHours();
+}
+
+// --- 3. EVENT LISTENER FOR LOGGING STUDY TIME ---
+if (addStudyBtn) {
+    addStudyBtn.addEventListener('click', function() {
+        // Add 0.5 hours (30 minutes) every time the button is clicked
+        studiedHours += 0.5;
+        
+        // Save to localStorage and update the dashboard UI instantly
+        saveStudyHours();
+    });
+}
+
+// Initial call to display study hours when page loads
+renderStudyHours();
