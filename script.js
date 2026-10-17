@@ -25,6 +25,12 @@ function renderTasks() {
     const completedTasks = tasks.filter(task => task.completed).length;
     const pendingTasks = totalTasks - completedTasks;
     const upcomingTasks = tasks.filter(task => !task.completed && task.priority.includes('Today')).length;
+    // Inside renderTasks(), calculate and update progress dynamically:
+    const progressStatEl = document.getElementById('progress-stat');
+    if (progressStatEl) {
+        const completionPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+        progressStatEl.textContent = completionPercentage + '% Completed';
+    }
 
     pendingCountEl.textContent = pendingTasks;
     completedCountEl.textContent = completedTasks;
