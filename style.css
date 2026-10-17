@@ -297,3 +297,47 @@
     font-weight: 600;
     color: #2563eb; /* Matches your CampusFlow primary blue accent */
 }
+
+/* --- ASSIGNMENTS SECTION STYLING (Using Classes) --- */
+
+/* 1. Main container card for assignments */
+.assignments-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+}
+
+/* 2. Unstyled list reset */
+.assignment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 3. Individual assignment item spacing and borders */
+.assignment-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Remove bottom border from the last item */
+.assignment-item:last-child {
+    border-bottom: none;
+}
+
+/* 4. Assignment title typography */
+.assignment-item h4 {
+    margin: 0 0 4px 0;
+    color: #1e293b;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* 5. Due date and detail description styling */
+.assignment-item span {
+    font-size: 13px;
+    color: #64748b;
+}

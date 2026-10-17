@@ -156,13 +156,15 @@ if (navTimetable) {
     navTimetable.addEventListener('click', function(e) {
         e.preventDefault(); // Stop page from jumping
         
-        // Switch content visibility
-        dashboardSection.style.display = 'none';  
-        timetableSection.style.display = 'block'; 
+       // Explicitly manage ALL sections (turn one ON, turn others OFF)
+        dashboardSection.style.display = 'none';
+        assignmentsSection.style.display = 'none'; // <-- THIS WAS MISSING!
+        timetableSection.style.display = 'block';
 
-        // Update active class on sidebar links
-        navTimetable.classList.add('active');     // Highlight Timetable link
-        navDashboard.classList.remove('active');  // Remove highlight from Dashboard
+        // Update active classes
+        navTimetable.classList.add('active');
+        navDashboard.classList.remove('active');
+        navAssignments.classList.remove('active');
     });
 }
 
@@ -171,12 +173,37 @@ if (navDashboard) {
     navDashboard.addEventListener('click', function(e) {
         e.preventDefault(); // Stop page from jumping
         
-        // Switch content visibility
-        timetableSection.style.display = 'none';  
-        dashboardSection.style.display = 'block'; 
+        // Explicitly hide ALL other sections, show Dashboard
+        timetableSection.style.display = 'none';
+        assignmentsSection.style.display = 'none'; // <-- Crucial!
+        dashboardSection.style.display = 'block';
 
-        // Update active class on sidebar links
-        navDashboard.classList.add('active');     // Highlight Dashboard link
-        navTimetable.classList.remove('active');  // Remove highlight from Timetable
+        // Update active classes on sidebar links
+        navDashboard.classList.add('active');
+        navTimetable.classList.remove('active');
+        navAssignments.classList.remove('active');
+    });
+}
+
+// --- ASSIGNMENTS VIEW SWITCHER ---
+
+// 1. Create variables using unique IDs
+const navAssignments = document.getElementById('nav-assignments');
+const assignmentsSection = document.getElementById('assignments-section');
+
+// 2. Add event listener if the assignment link exists
+if (navAssignments) {
+    navAssignments.addEventListener('click', function(e) {
+        e.preventDefault(); // Stop page from jumping
+
+        // 3. Hide Dashboard and Timetable, show Assignments block
+        dashboardSection.style.display = 'none';
+        timetableSection.style.display = 'none';
+        assignmentsSection.style.display = 'block';
+
+        // 4. Update active classes on sidebar links
+        navAssignments.classList.add('active');
+        navDashboard.classList.remove('active');
+        navTimetable.classList.remove('active');
     });
 }
