@@ -20,8 +20,7 @@ function renderTasks() {
     // Clear out the container first so we don't get duplicates
     taskContainer.innerHTML = '';
 
-    //2.Calculate stats
-    
+    // Calculate stats
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter(task => task.completed).length;
     const pendingTasks = totalTasks - completedTasks;
@@ -30,8 +29,6 @@ function renderTasks() {
     pendingCountEl.textContent = pendingTasks;
     completedCountEl.textContent = completedTasks;
     upcomingCountEl.textContent = upcomingTasks;
-
-
 
     // Loop through every task in our array and build its HTML
     tasks.forEach(task => {
@@ -61,30 +58,23 @@ function renderTasks() {
         // --- Wire up the delete logic here ---
         const deleteBtn = taskItem.querySelector('.delete-btn');
         deleteBtn.addEventListener('click', function() {
-            // 1. Filter out the task whose ID matches this specific task's ID
-            // (Keep everything WHERE task.id DOES NOT EQUAL this task's id)
             tasks = tasks.filter(t => t.id !== task.id);
-            
-            // 2. Wipe and redraw!
             renderTasks();
         });
 
         taskContainer.appendChild(taskItem);
     });
-} // <--- THIS WAS MISSING! It closes the renderTasks function.
+}
 
 // 4. WHAT: Listen for the user clicking the "Add Task" button
 addTaskBtn.addEventListener('click', function() {
-    // Grab what the user typed and trim whitespace
     const taskTitle = taskInput.value.trim();
 
-    // Guard clause: If the input box is empty, stop here and alert the user
     if (taskTitle === "") {
         alert("Please enter a task!");
         return;
     }
 
-    // Create a new task object using the typed text
     const newTask = {
         id: tasks.length + 1,
         title: taskTitle,
@@ -92,30 +82,20 @@ addTaskBtn.addEventListener('click', function() {
         completed: false
     };
 
-    // Push the new object into our global tasks array
     tasks.push(newTask);
-
-    // Clear the input field so it's ready for the next task
     taskInput.value = '';
-
-    // Re-run renderTasks() so the screen updates instantly with the new task!
     renderTasks();
 });
 
-
-
-// 5. Initial call: Draw the starting tasks when the page first loads
+// Initial call: Draw starting tasks
 renderTasks();
 
-// --- 1. STUDY HOURS DATA & LOCALSTORAGE ---
-// Load study hours from localStorage, or default to 2.5 if nothing is saved yet
+// --- STUDY HOURS DATA & LOCALSTORAGE ---
 let studiedHours = parseFloat(localStorage.getItem('studiedHours')) || 2.5;
 
-// Select elements for study hours
 const studiedCountEl = document.getElementById('studied-count');
 const addStudyBtn = document.getElementById('add-study-btn');
 
-// --- 2. RENDER & SAVE FUNCTIONS ---
 function renderStudyHours() {
     if (studiedCountEl) {
         studiedCountEl.textContent = studiedHours + 'h';
@@ -127,108 +107,122 @@ function saveStudyHours() {
     renderStudyHours();
 }
 
-// --- 3. EVENT LISTENER FOR LOGGING STUDY TIME ---
 if (addStudyBtn) {
     addStudyBtn.addEventListener('click', function() {
-        // Add 0.5 hours (30 minutes) every time the button is clicked
         studiedHours += 0.5;
-        
-        // Save to localStorage and update the dashboard UI instantly
         saveStudyHours();
     });
 }
 
-// Initial call to display study hours when page loads
 renderStudyHours();
 
-// --- VIEW SWITCHER & NAVIGATION LOGIC ---
+// --- VIEW SWITCHER & NAVIGATION ELEMENTS ---
 
-// 1. Grab our sidebar links using their IDs
+// 1. Sidebar Links
 const navDashboard = document.getElementById('nav-dashboard');
 const navTimetable = document.getElementById('nav-timetable');
+const navAssignments = document.getElementById('nav-assignments');
+const navStudy = document.getElementById('nav-study');
+const navProgress = document.getElementById('nav-progress');
 
-// 2. Grab our main content sections using their IDs
+// 2. Content Sections
 const dashboardSection = document.getElementById('dashboard-section');
 const timetableSection = document.getElementById('timetable-section');
+const assignmentsSection = document.getElementById('assignments-section');
+const studySection = document.getElementById('study-section');
+const progressSection = document.getElementById('progress-section');
 
-// 3. When user clicks "Timetable"
-if (navTimetable) {
-    navTimetable.addEventListener('click', function(e) {
-        e.preventDefault(); // Stop page from jumping
-        
-       // Explicitly manage ALL sections (turn one ON, turn others OFF)
-        dashboardSection.style.display = 'none';
-        assignmentsSection.style.display = 'none'; // <-- THIS WAS MISSING!
-        timetableSection.style.display = 'block';
-
-        // Update active classes
-        navTimetable.classList.add('active');
-        navDashboard.classList.remove('active');
-        navAssignments.classList.remove('active');
-    });
-}
-
-// 4. When user clicks "Dashboard"
+// --- DASHBOARD CLICK LISTENER ---
 if (navDashboard) {
     navDashboard.addEventListener('click', function(e) {
-        e.preventDefault(); // Stop page from jumping
+        e.preventDefault();
         
-        // Explicitly hide ALL other sections, show Dashboard
         timetableSection.style.display = 'none';
-        assignmentsSection.style.display = 'none'; // <-- Crucial!
+        assignmentsSection.style.display = 'none';
+        studySection.style.display = 'none';
+        progressSection.style.display = 'none';
         dashboardSection.style.display = 'block';
 
-        // Update active classes on sidebar links
         navDashboard.classList.add('active');
         navTimetable.classList.remove('active');
         navAssignments.classList.remove('active');
+        navStudy.classList.remove('active');
+        navProgress.classList.remove('active');
     });
 }
 
-// --- ASSIGNMENTS VIEW SWITCHER ---
+// --- TIMETABLE CLICK LISTENER ---
+if (navTimetable) {
+    navTimetable.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        dashboardSection.style.display = 'none';
+        assignmentsSection.style.display = 'none';
+        studySection.style.display = 'none';
+        progressSection.style.display = 'none';
+        timetableSection.style.display = 'block';
 
-// 1. Create variables using unique IDs
-const navAssignments = document.getElementById('nav-assignments');
-const assignmentsSection = document.getElementById('assignments-section');
+        navTimetable.classList.add('active');
+        navDashboard.classList.remove('active');
+        navAssignments.classList.remove('active');
+        navStudy.classList.remove('active');
+        navProgress.classList.remove('active');
+    });
+}
 
-// 2. Add event listener if the assignment link exists
+// --- ASSIGNMENTS CLICK LISTENER ---
 if (navAssignments) {
     navAssignments.addEventListener('click', function(e) {
-        e.preventDefault(); // Stop page from jumping
+        e.preventDefault();
 
-        // 3. Hide Dashboard and Timetable, show Assignments block
         dashboardSection.style.display = 'none';
         timetableSection.style.display = 'none';
+        studySection.style.display = 'none';
+        progressSection.style.display = 'none';
         assignmentsSection.style.display = 'block';
 
-        // 4. Update active classes on sidebar links
         navAssignments.classList.add('active');
         navDashboard.classList.remove('active');
         navTimetable.classList.remove('active');
+        navStudy.classList.remove('active');
+        navProgress.classList.remove('active');
     });
 }
 
-// --- STUDY TRACKER VIEW SWITCHER ---
-
-// 1. Create variables using unique IDs
-const navStudy = document.getElementById('nav-study');
-const studySection = document.getElementById('study-section');
-
-// 2. Add event listener if the study link exists
+// --- STUDY TRACKER CLICK LISTENER ---
 if (navStudy) {
     navStudy.addEventListener('click', function(e) {
-        e.preventDefault(); // Stop page from jumping
+        e.preventDefault();
 
-        // 3. Hide ALL other sections, show Study Tracker block
         dashboardSection.style.display = 'none';
         timetableSection.style.display = 'none';
         assignmentsSection.style.display = 'none';
+        progressSection.style.display = 'none';
         studySection.style.display = 'block';
 
-        // 4. Update active classes on sidebar links
         navStudy.classList.add('active');
         navDashboard.classList.remove('active');
         navTimetable.classList.remove('active');
         navAssignments.classList.remove('active');
+        navProgress.classList.remove('active');
+    });
+}
+
+// --- PROGRESS CLICK LISTENER ---
+if (navProgress) {
+    navProgress.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        dashboardSection.style.display = 'none';
+        timetableSection.style.display = 'none';
+        assignmentsSection.style.display = 'none';
+        studySection.style.display = 'none';
+        progressSection.style.display = 'block';
+
+        navProgress.classList.add('active');
+        navDashboard.classList.remove('active');
+        navTimetable.classList.remove('active');
+        navAssignments.classList.remove('active');
+        navStudy.classList.remove('active');
     });
 }
