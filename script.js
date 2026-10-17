@@ -140,3 +140,43 @@ if (addStudyBtn) {
 
 // Initial call to display study hours when page loads
 renderStudyHours();
+
+// --- VIEW SWITCHER & NAVIGATION LOGIC ---
+
+// 1. Grab our sidebar links using their IDs
+const navDashboard = document.getElementById('nav-dashboard');
+const navTimetable = document.getElementById('nav-timetable');
+
+// 2. Grab our main content sections using their IDs
+const dashboardSection = document.getElementById('dashboard-section');
+const timetableSection = document.getElementById('timetable-section');
+
+// 3. When user clicks "Timetable"
+if (navTimetable) {
+    navTimetable.addEventListener('click', function(e) {
+        e.preventDefault(); // Stop page from jumping
+        
+        // Switch content visibility
+        dashboardSection.style.display = 'none';  
+        timetableSection.style.display = 'block'; 
+
+        // Update active class on sidebar links
+        navTimetable.classList.add('active');     // Highlight Timetable link
+        navDashboard.classList.remove('active');  // Remove highlight from Dashboard
+    });
+}
+
+// 4. When user clicks "Dashboard"
+if (navDashboard) {
+    navDashboard.addEventListener('click', function(e) {
+        e.preventDefault(); // Stop page from jumping
+        
+        // Switch content visibility
+        timetableSection.style.display = 'none';  
+        dashboardSection.style.display = 'block'; 
+
+        // Update active class on sidebar links
+        navDashboard.classList.add('active');     // Highlight Dashboard link
+        navTimetable.classList.remove('active');  // Remove highlight from Timetable
+    });
+}

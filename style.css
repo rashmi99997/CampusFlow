@@ -244,3 +244,56 @@
 #add-study-btn:active {
     transform: scale(0.98); /* Subtle click-down effect */
 }
+
+/* --- TIMETABLE STYLING --- */
+
+/* 1. The Grid layout: automatically wraps cards depending on screen size */
+.timetable-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+/* 2. Individual Day Card Design */
+.day-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+/* 3. Day Header Styling */
+.day-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #1e293b;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 8px;
+}
+
+/* 4. Class List Items */
+.day-card .class-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.day-card .class-list li {
+    font-size: 14px;
+    color: #475569;
+    padding: 8px 0;
+    border-bottom: 1px dashed #f1f5f9;
+}
+
+.day-card .class-list li:last-child {
+    border-bottom: none; /* Removes border on the last item for a cleaner look */
+}
+
+/* 5. Time Badge Highlighting */
+.day-card .class-list li span {
+    font-weight: 600;
+    color: #2563eb; /* Matches your CampusFlow primary blue accent */
+}

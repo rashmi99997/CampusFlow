@@ -6,70 +6,101 @@
     <link rel="stylesheet" href="style.css">
     <title>CampusFlow - Student Workspace</title>
 </head>
-<body>
 
+    <body>
+
+    <!-- Outer container holding everything -->
     <div class="app-container">
-        <!-- Sidebar Navigation -->
+
+        <!-- 1. PERMANENT SIDEBAR (Stays visible forever on the left) -->
         <aside class="sidebar">
             <div class="logo">
                 <h2>CampusFlow</h2>
                 <span class="badge">STUDENT WORKSPACE</span>
             </div>
             <nav class="nav-links">
-                <a href="#" class="active">Dashboard</a>
-                <a href="#">Timetable</a>
-                <a href="#">Assignments</a>
+                <a href="#" class="active" id="nav-dashboard">Dashboard</a>
+                <a href="#" id="nav-timetable">Timetable</a>
+                <a href="#" id="nav-assignments">Assignments</a>
                 <a href="#">Study Tracker</a>
                 <a href="#">Progress</a>
             </nav>
         </aside>
 
-        <!-- Main Dashboard Area -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="header">
-                <h1>Good morning!</h1>
-                <p>Here's your academic overview.</p>
-            </header>
+        <!-- 2. MAIN CONTENT WRAPPER (Only the sections inside here will switch) -->
+        <div class="main-content-area" style="flex: 1; padding: 30px;">
 
-            <!-- Summary Cards -->
-        <section class="stats-grid">
-            <div class="card">
-                <h3 id="pending-count">08</h3>
-                <p>Pending tasks</p>
-            </div>
-            <div class="card">
-                <h3 id="completed-count">05</h3>
-                <p>Completed</p>
-            </div>
-            <div class="card">
-                <h3 id="upcoming-count">03</h3>
-                <p>Upcoming deadlines</p>
-            </div>
-            <div class="card">
-                <h3 id="studied-count">2.5h</h3>
-                <button id="add-study-btn">+ Log 30 Mins Study</button>
-                <p>Studied today</p>
-            </div>
-        </section>
+            <!-- DASHBOARD SECTION -->
+            <div id="dashboard-section" class="app-section">
+                <header class="header">
+                    <h1>Good morning!</h1>
+                    <p>Here's your academic overview.</p>
+                </header>
 
-            <!-- Today's Tasks Section -->
-            <!-- Today's Tasks Section -->
-        <section class="tasks-section">
-            <div class="section-header">
-                <h2>Today's Tasks</h2>
+                <!-- Summary Cards -->
+                <section class="stats-grid">
+                    <div class="card">
+                        <h3 id="pending-count">08</h3>
+                        <p>Pending tasks</p>
+                    </div>
+                    <div class="card">
+                        <h3 id="completed-count">05</h3>
+                        <p>Completed</p>
+                    </div>
+                    <div class="card">
+                        <h3 id="upcoming-count">03</h3>
+                        <p>Upcoming deadlines</p>
+                    </div>
+                    <div class="card">
+                        <h3 id="studied-count">2.5h</h3>
+                        <button id="add-study-btn">+ Log 30 Mins Study</button>
+                        <p>Studied today</p>
+                    </div>
+                </section>
+
+                <!-- Today's Tasks Section -->
+                <section class="tasks-section" style="margin-top: 30px;">
+                    <div class="section-header">
+                        <h2>Today's Tasks</h2>
+                    </div>
+                    <div class="task-input-container" style="margin-bottom: 20px; display: flex; gap: 10px;">
+                        <input type="text" id="task-input" placeholder="What needs to be done?" style="flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
+                        <button id="add-task-btn" style="padding: 10px 20px; background-color: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer;">+ Add New Task</button>
+                    </div>
+                    <div class="task-list"></div>
+                </section>
             </div>
 
-            <!-- Input form area that stays permanently on the page -->
-            <div class="task-input-container" style="margin-bottom: 20px; display: flex; gap: 10px;">
-                <input type="text" id="task-input" placeholder="What needs to be done?" style="flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1;">
-                <button id="add-task-btn" style="padding: 10px 20px; background-color: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer;">+ Add New Task</button>
+            <!-- TIMETABLE SECTION (Hidden by default) -->
+            <div id="timetable-section" class="app-section" style="display: none;">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <h2>Weekly Schedule</h2>
+                    <p style="color: #64748b;">Your semester classes at a glance.</p>
+                </div>
+                <div class="timetable-grid">
+                    <div class="day-card">
+                        <h3>Monday</h3>
+                        <ul class="class-list">
+                            <li><span>09:00 AM</span> - Data Structures</li>
+                            <li><span>11:00 AM</span> - Java OOP</li>
+                            <li><span>02:00 PM</span> - Digital Electronics</li>
+                        </ul>
+                    </div>
+                    <div class="day-card">
+                        <h3>Tuesday</h3>
+                        <ul class="class-list">
+                            <li><span>10:00 AM</span> - Discrete Math</li>
+                            <li><span>11:30 AM</span> - Software Engineering</li>
+                            <li><span>02:30 PM</span> - Probability & Stats</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
+            <!-- ASSIGNMENTS SECTION (Hidden by default) -->
             
-            <!-- This container is strictly for the dynamic task cards -->
-            <div class="task-list"></div>
-        </section>
-        </main>
+
+        </div>
     </div>
 
     <script src="script.js"></script>
