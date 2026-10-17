@@ -207,3 +207,28 @@ if (navAssignments) {
         navTimetable.classList.remove('active');
     });
 }
+
+// --- STUDY TRACKER VIEW SWITCHER ---
+
+// 1. Create variables using unique IDs
+const navStudy = document.getElementById('nav-study');
+const studySection = document.getElementById('study-section');
+
+// 2. Add event listener if the study link exists
+if (navStudy) {
+    navStudy.addEventListener('click', function(e) {
+        e.preventDefault(); // Stop page from jumping
+
+        // 3. Hide ALL other sections, show Study Tracker block
+        dashboardSection.style.display = 'none';
+        timetableSection.style.display = 'none';
+        assignmentsSection.style.display = 'none';
+        studySection.style.display = 'block';
+
+        // 4. Update active classes on sidebar links
+        navStudy.classList.add('active');
+        navDashboard.classList.remove('active');
+        navTimetable.classList.remove('active');
+        navAssignments.classList.remove('active');
+    });
+}
